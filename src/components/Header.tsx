@@ -3,7 +3,7 @@ import React from "react";
 export default function Header() {
     return (
         <>
-            <div className="bg-slate-200 font-bold text-lg fixed top-0 p-4 mb-4 w-full flex justify-between items-center">
+            <div className="bg-slate-200 font-bold text-lg sticky top-0 p-4 mb-4 w-full flex justify-between items-center">
                 <h3>bdki's</h3>
                 <h1>FOOTBALL SHOP</h1>
                 <div className="flex justify-between items-center">
