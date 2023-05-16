@@ -1,22 +1,26 @@
-
 import { useEffect, useState } from "react";
 
-interface Data {
-    playerPrice: number;
-    name: string;
-    description?: string;
-}
-  
-
 export default function useFetchAPI(url: string) {
-  const [Data, setData] = useState(null)
-  useEffect(() => {
-    fetch(url)
-    .then(response => response.json())
-    .then((data: Data[]) => console.log(data))
-    .catch((error: Error) => console.error(error))
-  }, [])
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  return ( Data )
-}  
-  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(url);
+        const data = await response.json();
+        setData(data);
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { data, loading };
+}
