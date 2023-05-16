@@ -19,6 +19,17 @@ export default function MainPage() {
     }
   };
 
+  const handleCartRemove = (playerName: string, playerPrice: any) => {
+    const price = parseInt(playerPrice)
+    
+    if (cartTotal <= 100 && cartTotal + price <= 100) {
+      setCartTotal((prevTotal) => prevTotal - price);
+      setCartStatus((prevStatus) => ({ ...prevStatus, [playerName]: false }));
+    } else {
+      alert('Cart limit reached' + price);
+    }
+  };
+
   return (
     <>
       <Header cartTotal={cartTotal} />
@@ -36,6 +47,7 @@ export default function MainPage() {
               playerLogo={player.player_image}
               playerPrice={player.player_number}
               handleCartAdd={() => handleCartAdd(player.player_name, player.player_number)}
+              handleCartRemove={() => handleCartRemove(player.player_name, player.player_number)}
               isInCart={cartStatus[player.player_name] || false}
             />
           ))}

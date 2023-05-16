@@ -5,10 +5,13 @@ interface PlayerCardProps {
     playerPrice: number,
     playerLogo: string,
     handleCartAdd: any,
+    handleCartRemove: any
     isInCart: boolean
 }
 
-const PlayerCard: React.FC<PlayerCardProps> = ({playerName, playerPrice, playerLogo, handleCartAdd, isInCart}) => {
+const PlayerCard: React.FC<PlayerCardProps> = ({
+    playerName, playerPrice, playerLogo, 
+    handleCartAdd, isInCart, handleCartRemove}) => {
     return (
         <>
             <div className="flex flex-col items-center items-center m-2 p-2 bg-red-400 mw-80 mh-80">
@@ -17,7 +20,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({playerName, playerPrice, playerL
                 <div className="w-full h-full flex justify-around items-center">
                     <span className="p-4">${playerPrice}</span>
                     <button className="border border-black p-2" onClick={handleCartAdd}>Add to cart</button>
-                    { isInCart && (<button className="p-2"><img src="delete.png" alt="trashcan" width={40} height={30}></img></button> )}
+                    { isInCart && (<button className="p-2" onClick={handleCartRemove} ><img src="delete.png" alt="trashcan" width={40} height={30}></img></button> )}
                 </div>    
             </div>        
         </>
