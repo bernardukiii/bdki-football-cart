@@ -14,9 +14,12 @@ export default function MainPage() {
   const [cartTotal, setCartTotal] = useState(0)
   
   const handleCartAdd = (playerPrice: any) => {
-    const price = parseInt(playerPrice)
-    setCartTotal(cartTotal + price);
-    console.log(cartTotal)
+     if(cartTotal <= 100 && (cartTotal + parseInt(playerPrice)) <= 100) {
+        const price = parseInt(playerPrice)
+        setCartTotal(cartTotal + price);
+    } else {
+        return alert('cart limit')
+    }
   }
 
   return (
