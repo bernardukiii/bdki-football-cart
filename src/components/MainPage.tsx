@@ -3,9 +3,9 @@ import PlayerCard from "./PlayerCard";
 import useFetchAPI from '../app/useFetch_API';
 import Header from "./Header";
 
-function getRandomTeam() {
-  return Math.floor(Math.random() * 100)
-}
+// function getRandomTeam() {
+//   return Math.floor(Math.random() * 100)
+// }
 
 // const randomTeam = getRandomTeam()
 
