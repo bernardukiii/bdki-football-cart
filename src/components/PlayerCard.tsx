@@ -3,11 +3,11 @@ import React from "react";
 interface PlayerCardProps {
     playerName: string,
     playerPrice: number,
-    playerLogo: string
+    playerLogo: string,
+    handleCartAdd: any
 }
 
-const PlayerCard: React.FC<PlayerCardProps> = ({playerName, playerPrice, playerLogo}) => {
-    // Add to cart function must be added here
+const PlayerCard: React.FC<PlayerCardProps> = ({playerName, playerPrice, playerLogo, handleCartAdd}) => {
     return (
         <>
             <div className="flex flex-col items-center items-center m-2 p-2 bg-red-400 mw-80 mh-80">
@@ -15,7 +15,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({playerName, playerPrice, playerL
                 <img src={playerLogo} alt="clublogo" className="bg-blue-400 m-2 mh-full mw-full radius-50"></img>
                 <div className="w-full h-full flex justify-around items-center">
                     <span className="p-4">${playerPrice}</span>
-                    <button className="border border-black p-2">Add to cart</button>
+                    <button className="border border-black p-2" onClick={handleCartAdd}>Add to cart</button>
                 </div>    
             </div>        
         </>

@@ -1,13 +1,11 @@
-import MainSection from '@/components/MainPage';
-import Header from '../components/Header';
+import MainPage from '@/components/MainPage';
 import "../app/globals.css";
+import React, { useState } from 'react';
 
 export default function Home() {
   return (
     <main className="bg-white min-h-screen w-screen flex-col items-center justify-between">
-        <Header />
-
-        <MainSection />
+        <MainPage />
     </main>
   )
 }
