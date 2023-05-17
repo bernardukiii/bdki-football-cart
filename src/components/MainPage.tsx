@@ -24,11 +24,11 @@ export default function MainPage() {
   const handleCartRemove = (playerName: string, playerPrice: any) => {
     const price = parseInt(playerPrice)
     
-    if (cartTotal <= 100 && cartTotal + price <= 100) {
+    if (cartTotal > 0 && cartTotal - price >= 0) {
       setCartTotal((prevTotal) => prevTotal - price);
       setCartStatus((prevStatus) => ({ ...prevStatus, [playerName]: false }));
-    } else {
-      return
+    } else if (cartTotal - price < 0) {
+      setCartTotal(0)
     }
   };
 
@@ -53,9 +53,9 @@ export default function MainPage() {
               key={player.player_key}
               playerName={player.player_name}
               playerLogo={player.player_image}
-              playerPrice={player.player_number}
-              handleCartAdd={() => handleCartAdd(player.player_name, player.player_number)}
-              handleCartRemove={() => handleCartRemove(player.player_name, player.player_number)}
+              playerPrice={player.player_age}
+              handleCartAdd={() => handleCartAdd(player.player_name, player.player_age)}
+              handleCartRemove={() => handleCartRemove(player.player_name, player.player_age)}
               isInCart={cartStatus[player.player_name] || false}
             />
           ))}

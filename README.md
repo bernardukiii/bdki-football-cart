@@ -41,4 +41,4 @@ I created a component for each card
 
 I got the data from the API
 
-I used the jersey number of the player as the price so it's not such a big number
+I used the age of the player as the price so it's not such a big number and because they all have an age. Not all have a jersey number.
