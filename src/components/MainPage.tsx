@@ -43,11 +43,14 @@ export default function MainPage() {
      { warning ? <ConfirmationPopUp handleClose={handleCloseWarning}/> : null }
 
       <div className="h-full w-full flex flex-col items-center">
-        <h1 className="p-2 m-2 text-lg">{data?.result[0]?.team_name || 'Oops, an error occurred!'}</h1>
-
-        {loading && <p>Loading...</p>}
-
-        <div className="grid gap-4 md:grid-cols-4 grid-rows-4">
+        <div className="bg-green-800 border-y-8 border-green-950 w-screen flex justify-center items-center">
+          <div className="bg-green-950 border-8 border-green-700 w-60 h-70 flex flex-col justify-center items-center text-white font-semibold p-2 rounded-2xl my-4">
+            <h1 className="p-2 m-2 text-lg">{data?.result[0]?.team_name || 'Oops, an error occurred!'}</h1>
+            <img src={data?.result[0]?.team_logo}></img>
+            {loading && <p>Loading...</p>}
+          </div>
+        </div>
+        <div className="py-4 grid gap-4 md:grid-cols-4 grid-rows-4">
           {data?.result[0]?.players.map((player: any) => (
             <PlayerCard
               key={player.player_key}
