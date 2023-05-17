@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import PlayerCard from "./PlayerCard";
 import useFetchAPI from '../app/useFetch_API';
 import Header from "./Header";
+import ConfirmationPopUp from "./WarningPopUp";
 
 export default function MainPage() {
   const { data, loading } = useFetchAPI(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=80&APIkey=5236ed59d8bee807fe40271e4c712d271677c89bd7609a53dad5de9f5de09686`)  
   const [cartTotal, setCartTotal] = useState(0);
   const [cartStatus, setCartStatus] = useState<{ [key: string]: boolean }>({});
+  const [warning, setWarning] = useState(false)
 
   const handleCartAdd = (playerName: string, playerPrice: any) => {
     const price = parseInt(playerPrice)
@@ -15,7 +17,7 @@ export default function MainPage() {
       setCartTotal((prevTotal) => prevTotal + price);
       setCartStatus((prevStatus) => ({ ...prevStatus, [playerName]: true }));
     } else {
-      alert('Cart limit reached' + price);
+      setWarning(true)
     }
   };
 
@@ -26,13 +28,19 @@ export default function MainPage() {
       setCartTotal((prevTotal) => prevTotal - price);
       setCartStatus((prevStatus) => ({ ...prevStatus, [playerName]: false }));
     } else {
-      alert('Cart limit reached' + price);
+      return
     }
   };
+
+  const handleCloseWarning = () => {
+    setWarning(false)
+  }
 
   return (
     <>
       <Header cartTotal={cartTotal} />
+
+     { warning ? <ConfirmationPopUp handleClose={handleCloseWarning}/> : null }
 
       <div className="h-full w-full flex flex-col items-center">
         <h1 className="p-2 m-2 text-lg">{data?.result[0]?.team_name || 'Oops, an error occurred!'}</h1>
