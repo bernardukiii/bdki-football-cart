@@ -34,7 +34,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
                 <div className="w-full h-full flex justify-around items-center mt-4 border-t-4 border-green-950">
                     <span className="p-2 mt-2 flex-1 flex justify-center font-semibold text-lg">${playerPrice}</span>
                     { isInCart ? '' : <button className="mt-2 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg p-2 flex-1" onClick={handleCartAdd}>Add to cart</button> }
-                    { isInCart && (<button className="mt-2 p-2 flex-1 flex justify-center" onClick={handleCartRemove} ><img src="delete.png" alt="trashcan" width={30} height={30}></img></button> )}
+                    { isInCart && (<button className="mt-2 p-2 flex-1 flex justify-center" onClick={handleCartRemove} ><img src="delete.png" alt="trashcan" width={25} height={25}></img></button> )}
                 </div>    
             </div>        
         </>
