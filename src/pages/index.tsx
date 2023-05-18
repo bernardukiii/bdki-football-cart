@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 export default function Home() {
   return (
-    <main className="bg-white min-h-screen w-screen flex-col items-center justify-between">
+    <main className="bg-white min-h-screen w-full flex-col items-center justify-between">
         <MainPage />
     </main>
   )
