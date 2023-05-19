@@ -6,9 +6,10 @@ import ConfirmationPopUp from "./WarningPopUp";
 
 export default function MainPage() {
   const { data, loading } = useFetchAPI(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=80&APIkey=5236ed59d8bee807fe40271e4c712d271677c89bd7609a53dad5de9f5de09686`)  
-  const [cartTotal, setCartTotal] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0)
   const [cartStatus, setCartStatus] = useState<{ [key: string]: boolean }>({});
   const [warning, setWarning] = useState(false)
+  const [userInput, setUserInput] = useState("")
 
   const handleCartAdd = (playerName: string, playerPrice: any) => {
     const price = parseInt(playerPrice)
@@ -36,6 +37,11 @@ export default function MainPage() {
     setWarning(false)
   }
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("this is " + e.target.value)
+    setUserInput(e.target.value)
+  }
+
   return (
     <>
       <Header cartTotal={cartTotal} />
@@ -50,18 +56,38 @@ export default function MainPage() {
             {loading && <p>Retrieving data...</p>}
           </div>
         </div>
-        <div className="py-4 grid gap-4 md:grid-cols-4 grid-rows-4">
-          {data?.result[0]?.players.map((player: any) => (
-            <PlayerCard
-              key={player.player_key}
-              playerName={player.player_name}
-              playerLogo={player.player_image}
-              playerPrice={player.player_age}
-              handleCartAdd={() => handleCartAdd(player.player_name, player.player_age)}
-              handleCartRemove={() => handleCartRemove(player.player_name, player.player_age)}
-              isInCart={cartStatus[player.player_name] || false}
-            />
-          ))}
+        {/* Grid + searchbar */}
+        <div>
+          {/* Search function */}
+          <div className="p-2 m-2">
+              <span className="p-2 font-semibold text-lg">Search:</span>
+              <input className="border border-4 border-green-900 p-2" type="text" value={userInput} placeholder="Messi" onChange={handleSearch} ></input>
+          </div>
+        
+           <div className="py-4 grid gap-4 md:grid-cols-4 grid-rows-4">
+              {data?.result[0]?.players
+                .filter((player: any) => {
+                  if (userInput == '') {
+                    return true
+                  } else if (player.player_name.toLowerCase().includes(userInput.toLowerCase())) {
+                    console.log(userInput)
+
+                    return player
+                  }
+                  }
+                )
+                .map((player: any) => (
+                <PlayerCard
+                  key={player.player_key}
+                  playerName={player.player_name}
+                  playerLogo={player.player_image}
+                  playerPrice={player.player_age}
+                  handleCartAdd={() => handleCartAdd(player.player_name, player.player_age)}
+                  handleCartRemove={() => handleCartRemove(player.player_name, player.player_age)}
+                  isInCart={cartStatus[player.player_name] || false}
+                />
+                ))}
+              </div>
         </div>
       </div>
     </>
