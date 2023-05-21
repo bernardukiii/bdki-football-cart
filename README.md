@@ -33,7 +33,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Developer process
+## Development process
 
 I used an API from All Sports
 
@@ -42,3 +42,5 @@ I created a component for each card
 I got the data from the API
 
 I used the age of the player as the price so it's not such a big number and because they all have an age. Not all have a jersey number.
+
+I need to use .normalize("NFD").replace(/[\u0300-\u036f]/g, "") to replace the letters that have a tilde diacritic to ignore it and search anyways.
