@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-
+// 'Props' need to be declared with an interface to use them in functional components
 interface PlayerCardProps {
     playerName: string,
     playerPrice: number,

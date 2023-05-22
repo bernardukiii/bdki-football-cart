@@ -3,7 +3,6 @@ import PlayerCard from "./PlayerCard";
 import useFetchAPI from '../app/useFetch_API';
 import Header from "./Header";
 import ConfirmationPopUp from "./WarningPopUp";
-
 // Randomize team id between a certain number to change teams and to make it more interesting
 function randomizeTeam(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min
@@ -20,7 +19,7 @@ export default function MainPage() {
   const [warning, setWarning] = useState(false)
   const [userInput, setUserInput] = useState("")
   const [playerCart, setPlayerCart] = useState<any[]>([])
-  // Use effect hook for cart handling
+  // Use effect hooks for cart handling
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedTotal = localStorage.getItem('total');
@@ -57,7 +56,7 @@ export default function MainPage() {
   useEffect(() => {
    localStorage.setItem('total', JSON.stringify(cartTotal)) 
   }, [cartTotal])
-  // Functions
+  // User handling functions
   const handleCartAdd = (playerName: string, playerPrice: any) => {
     const playerItem = {
       'player': playerName,
@@ -104,9 +103,9 @@ export default function MainPage() {
   return (
     <>
       <Header cartTotal={cartTotal} />
-
+      {/* When limit exceeds $100 */}
      { warning ? <ConfirmationPopUp handleClose={handleCloseWarning}/> : null }
-
+      {/* Intro team section header */}
       <div className="h-full w-full flex flex-col items-center">
         <div className="bg-green-800 border-y-8 border-green-950 w-full flex justify-center items-center">
           <div className="bg-green-950 border-8 border-green-700 w-60 h-70 flex flex-col justify-center items-center text-white font-semibold p-2 rounded-2xl my-4">
@@ -129,8 +128,6 @@ export default function MainPage() {
                   if (userInput == '') {
                     return true
                   } else if (player.player_name.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(userInput.toLowerCase())) {
-                    console.log(userInput)
-
                     return player
                   }
                   }

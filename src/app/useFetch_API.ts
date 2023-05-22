@@ -11,7 +11,6 @@ export default function useFetchAPI(url: string) {
         const response = await fetch(url);
         const data = await response.json();
         setData(data);
-        console.log(data);
       } catch (error) {
         console.error(error);
       } finally {

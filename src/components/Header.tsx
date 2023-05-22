@@ -1,5 +1,5 @@
 import React from "react";
-
+// 'Props' need to be declared with an interface to use them in functional components
 interface HeaderProps {
     cartTotal: number
 }
