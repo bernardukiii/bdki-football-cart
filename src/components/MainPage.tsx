@@ -12,7 +12,7 @@ const randomTeam = randomizeTeam(80, 90)
 // MainPage component
 export default function MainPage() {
   // Custom hook to fetch from an api
-  const { data, loading } = useFetchAPI(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${randomTeam}&APIkey=5236ed59d8bee807fe40271e4c712d271677c89bd7609a53dad5de9f5de09686`)  
+  const { data, loading } = useFetchAPI(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${randomTeam}&APIkey=${process.env.NEXT_PUBLIC_API_KEY}`)  
   // Declared state for a handful of things
   const [cartTotal, setCartTotal] = useState<number>(0)
   const [cartStatus, setCartStatus] = useState<{ [key: string]: boolean }>({});
