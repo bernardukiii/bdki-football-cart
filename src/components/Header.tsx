@@ -8,7 +8,7 @@ const Header:React.FC<HeaderProps> = ({cartTotal}) => {
     return (
         <>
             <div className="bg-green-900 border-b-8 border-green-950 text-white font-bold text-lg sticky top-0 p-4 mb-4 w-full flex justify-around items-center">
-                <h3 className="flex-grow-1">bdki's</h3>
+                <h3 className="flex-grow-1">bdki&apos;s</h3>
                 <h1 className="flex-grow-2">FOOTBALL SHOP</h1>
                 <div className="flex-grow-1 flex justify-between items-center">
                     <img src="icons8-cart-64.png" alt="cart" width={40} height={40}></img>
