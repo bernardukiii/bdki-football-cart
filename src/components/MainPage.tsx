@@ -118,7 +118,7 @@ export default function MainPage() {
         <div>
           {/* Searchbar */}
           <div className="p-2 m-2">
-              <span className="p-2 font-semibold text-lg">Search:</span>
+              <span className="p-2 font-semibold text-lg text-black">Search:</span>
               <input className="border border-4 border-green-900 p-2" type="text" value={userInput} placeholder="Messi" onChange={handleSearch} ></input>
           </div>
           {/* Search and map */}
