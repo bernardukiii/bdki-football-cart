@@ -3,26 +3,34 @@ import PlayerCard from "./PlayerCard";
 import useFetchAPI from '../app/useFetch_API';
 import Header from "./Header";
 import ConfirmationPopUp from "./WarningPopUp";
-
+// MainPage component
 export default function MainPage() {
   // Custom hook to fetch from an api
   const { data, loading } = useFetchAPI(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=80&APIkey=5236ed59d8bee807fe40271e4c712d271677c89bd7609a53dad5de9f5de09686`)  
   // Declared state for a handful of things
-  const [cartTotal, setCartTotal] = useState(0)
+  const [cartTotal, setCartTotal] = useState<number>(0)
   const [cartStatus, setCartStatus] = useState<{ [key: string]: boolean }>({});
   const [warning, setWarning] = useState(false)
   const [userInput, setUserInput] = useState("")
   const [playerCart, setPlayerCart] = useState<any[]>([])
-
   // Use effect hook for cart handling
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedTotal = localStorage.getItem('total');
+      setCartTotal(storedTotal ? parseInt(storedTotal) : 0);
+    }
+  }, []);
+
   useEffect(() => {
     const cartFromLocalStorage = localStorage.getItem('cart')
     const cartStatusFromLocalStorage = localStorage.getItem('cartStatus')
     const cartTotalFromLocalStorage = localStorage.getItem('cartTotal')
+    
     if (cartFromLocalStorage) {
       const parsedCart = JSON.parse(cartFromLocalStorage)
       setPlayerCart(parsedCart)
     }
+    
     if (cartStatusFromLocalStorage) {
       const parsedCartStatus = JSON.parse(cartStatusFromLocalStorage)
       setCartStatus(parsedCartStatus)
@@ -42,7 +50,6 @@ export default function MainPage() {
   useEffect(() => {
    localStorage.setItem('total', JSON.stringify(cartTotal)) 
   }, [cartTotal])
-
   // Functions
   const handleCartAdd = (playerName: string, playerPrice: any) => {
     const playerItem = {
@@ -65,8 +72,15 @@ export default function MainPage() {
     const price = parseInt(playerPrice)
 
     if (cartTotal > 0 && cartTotal - price >= 0) {
+      const updatedCart = playerCart.filter((player) => player.player !== playerName);
+      
       setCartTotal((prevTotal) => prevTotal - price);
       setCartStatus((prevStatus) => ({ ...prevStatus, [playerName]: false }));
+      setPlayerCart(updatedCart);
+
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      localStorage.removeItem(playerName)
+
     } else if (cartTotal - price < 0) {
       setCartTotal(0)
     }
