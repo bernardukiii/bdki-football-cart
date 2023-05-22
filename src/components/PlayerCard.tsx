@@ -25,7 +25,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
                 <h3 className="p-2 font-semibold text-xl border-b-4 border-green-600">{playerName}</h3>
                 
                 <div className="max-h-40">
-                { hasError ? 
+                { hasError || playerLogo == null ? 
                     <img src={'anony.jpeg'} onError={handleImageError} alt="notfound" className="bg-blue-400 m-2 h-40 w-40 rounded-full"></img>
                                         : 
                     <img src={playerLogo} onError={handleImageError} alt="playerphoto" className="bg-blue-400 m-2 mh-full mw-full rounded-full"></img> }
