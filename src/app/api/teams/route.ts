@@ -1,7 +1,6 @@
 import axios from "axios"
 import { NextResponse } from "next/server"
 import randomizeTeam from "@/app/utils/randomTeam"
-import { data } from "autoprefixer"
   
 const randomTeam = randomizeTeam(80, 90)
 
