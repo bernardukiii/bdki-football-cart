@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import PlayerCard from "./PlayerCard";
-import useFetchAPI from '../useFetch_API';
 import Header from "./Header";
 import ConfirmationPopUp from "./WarningPopUp";
 
