@@ -5,7 +5,6 @@ import randomizeTeam from "@/app/utils/randomTeam"
 const randomTeam = randomizeTeam(80, 90)
 
 export async function GET() {
-    console.log('sarting backend GET')
     const response = await axios.get(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${randomTeam}&APIkey=${process.env.API_KEY}`)
     try {
         if (response.status === 200) {
