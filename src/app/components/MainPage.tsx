@@ -2,26 +2,34 @@
 
 import React, { useState, useEffect } from "react";
 import PlayerCard from "./PlayerCard";
-import useFetchAPI from '../useFetch_API';
 import Header from "./Header";
 import ConfirmationPopUp from "./WarningPopUp";
-// Randomize team id between a certain number to change teams and to make it more interesting
-function randomizeTeam(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
+import axios from "axios";
 
-const randomTeam = randomizeTeam(80, 90)
 // MainPage component
 export default function MainPage() {
-  // Custom hook to fetch from an api
-  const { data, loading } = useFetchAPI(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${randomTeam}&APIkey=${process.env.API_KEY}`)  
   // Declared state for a handful of things
+  const [data, setData] = useState<any>()
+  const [loading, setLoading] = useState<boolean>(true)
   const [cartTotal, setCartTotal] = useState<number>(0)
   const [cartStatus, setCartStatus] = useState<{ [key: string]: boolean }>({});
   const [warning, setWarning] = useState(false)
   const [userInput, setUserInput] = useState("")
   const [playerCart, setPlayerCart] = useState<any[]>([])
   // Use effect hooks for cart handling
+  // use effect for the API call
+  useEffect(() => {
+    axios.get('/api/teams')
+    .then((response) => {     
+      if (response.status === 200) {
+        setData(response.data.data)
+        setLoading(false)
+      }
+    })
+    .catch((error) => {
+      console.log('there was an error on the front', error)
+    })
+  }, [])
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedTotal = localStorage.getItem('total');
@@ -150,7 +158,6 @@ export default function MainPage() {
           </div>
         </div>
       </main>
-
     </>
   )
 }
