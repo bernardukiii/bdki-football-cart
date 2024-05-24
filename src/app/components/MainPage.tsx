@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PlayerCard from "./PlayerCard";
-import useFetchAPI from '../app/useFetch_API';
+import useFetchAPI from '../useFetch_API';
 import Header from "./Header";
 import ConfirmationPopUp from "./WarningPopUp";
 // Randomize team id between a certain number to change teams and to make it more interesting

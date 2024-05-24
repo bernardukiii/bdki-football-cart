@@ -1,4 +1,4 @@
-import MainPage from '@/components/MainPage';
+import MainPage from "./components/MainPage";
 import "../app/globals.css";
 import React, { useState } from 'react';
 
