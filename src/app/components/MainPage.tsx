@@ -15,7 +15,11 @@ export default function MainPage() {
     
     if (response.status === 200) {
       console.log('DATA', response.data)
+      setData(response.data)
     }
+  })
+  .catch((error) => {
+    console.log('there was an error on the front', error)
   })
   // Declared state for a handful of things
   const [data, setData] = useState()
@@ -117,7 +121,7 @@ export default function MainPage() {
             <div className="bg-green-950 border-8 border-green-700 w-60 h-70 flex flex-col justify-center items-center text-white font-semibold p-2 rounded-2xl my-4">
               <h1 className="p-2 m-2 text-lg text-xl">{data?.result[0]?.team_name}</h1>
               <img src={data?.result[0]?.team_logo}></img>
-              {loading && <p>Retrieving data...</p>}
+              {/* {loading && <p>Retrieving data...</p>} */}
             </div>
           </div>
             {/* Grid + searchbar */}
