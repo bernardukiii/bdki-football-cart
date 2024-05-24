@@ -5,16 +5,10 @@ import PlayerCard from "./PlayerCard";
 import useFetchAPI from '../useFetch_API';
 import Header from "./Header";
 import ConfirmationPopUp from "./WarningPopUp";
-// Randomize team id between a certain number to change teams and to make it more interesting
-function randomizeTeam(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
 
-const randomTeam = randomizeTeam(80, 90)
 // MainPage component
 export default function MainPage() {
   // Custom hook to fetch from an api
-  const { data, loading } = useFetchAPI(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${randomTeam}&APIkey=${process.env.API_KEY}`)  
   // Declared state for a handful of things
   const [cartTotal, setCartTotal] = useState<number>(0)
   const [cartStatus, setCartStatus] = useState<{ [key: string]: boolean }>({});
