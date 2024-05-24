@@ -4,11 +4,21 @@ import React, { useState, useEffect } from "react";
 import PlayerCard from "./PlayerCard";
 import Header from "./Header";
 import ConfirmationPopUp from "./WarningPopUp";
+import axios from "axios";
 
 // MainPage component
 export default function MainPage() {
-  // Custom hook to fetch from an api
+  // API call
+  axios.get('/api/teams')
+  .then((response) => {
+    console.log('REQ on frontend', response.status)
+    
+    if (response.status === 200) {
+      console.log('DATA', response.data)
+    }
+  })
   // Declared state for a handful of things
+  const [data, setData] = useState()
   const [cartTotal, setCartTotal] = useState<number>(0)
   const [cartStatus, setCartStatus] = useState<{ [key: string]: boolean }>({});
   const [warning, setWarning] = useState(false)
@@ -143,7 +153,6 @@ export default function MainPage() {
           </div>
         </div>
       </main>
-
     </>
   )
 }
