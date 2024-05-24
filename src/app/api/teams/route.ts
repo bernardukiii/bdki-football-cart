@@ -9,7 +9,6 @@ export async function GET() {
     const response = await axios.get(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${randomTeam}&APIkey=${process.env.API_KEY}`)
     try {
         if (response.status === 200) {
-            console.log(response.data)
             return NextResponse.json({ status: response.status, message: 'The request was SUCCESSFULL in the backend!', data: response.data})
         } else {
             return NextResponse.json({ status: response.status, message: 'The request FAILED in the backend :('})

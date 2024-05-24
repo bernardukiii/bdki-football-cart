@@ -15,7 +15,7 @@ export default function MainPage() {
     
     if (response.status === 200) {
       console.log('DATA', response.data)
-      setData(response.data)
+      setData(response.data.data)
     }
   })
   .catch((error) => {
