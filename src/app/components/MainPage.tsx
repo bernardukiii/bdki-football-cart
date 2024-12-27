@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import PlayerCard from "./PlayerCard";
 import Header from "./Header";
 import ConfirmationPopUp from "./WarningPopUp";
-import axios from "axios";
 
 // MainPage component
 export default function MainPage() {
@@ -18,18 +17,29 @@ export default function MainPage() {
   const [playerCart, setPlayerCart] = useState<any[]>([])
   // Use effect hooks for cart handling
   // use effect for the API call
-  useEffect(() => {
-    axios.get('/api/teams')
-    .then((response) => {     
-      if (response.status === 200) {
-        setData(response.data.data)
+  
+  // API call using FETCH
+  const getDataFromServer = async () => {
+    try {
+      console.log('trying to get from back to front')
+      const response = await fetch('/api/teams')
+
+      if (response.status == 200) {
+        const data = await response.json()
+
+        setData(data.data)
         setLoading(false)
+
+      } else {
+        console.error('Negative response:', response.status)
       }
-    })
-    .catch((error) => {
-      console.log('there was an error on the front', error)
-    })
-  }, [])
+    } catch { 
+      console.error('Was not able to perform the fetch on the front :(')
+    }
+  }
+ 
+  useEffect(() => { getDataFromServer() }, [])
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedTotal = localStorage.getItem('total');
