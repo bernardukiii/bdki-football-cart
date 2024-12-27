@@ -24,13 +24,13 @@ importers:
         specifier: 8.40.0
         version: 8.40.0
       eslint-config-next:
-        specifier: ^14.2.3
+        specifier: ^14.2.22
         version: 14.2.22(eslint@8.40.0)(typescript@5.0.4)
       next:
-        specifier: ^14.2.3
+        specifier: ^14.2.22
         version: 14.2.22(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       postcss:
-        specifier: ^8.4.31
+        specifier: ^8.4.49
         version: 8.4.49
       react:
         specifier: ^18.3.1
@@ -48,7 +48,7 @@ importers:
         specifier: ^1.2.5
         version: 1.2.5
       zod:
-        specifier: ^3.22.4
+        specifier: ^3.24.1
         version: 3.24.1
 
 packages:
