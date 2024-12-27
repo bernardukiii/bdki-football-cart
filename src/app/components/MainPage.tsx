@@ -21,7 +21,6 @@ export default function MainPage() {
   // API call using FETCH
   const getDataFromServer = async () => {
     try {
-      console.log('trying to get from back to front')
       const response = await fetch('/api/teams')
 
       if (response.status == 200) {
