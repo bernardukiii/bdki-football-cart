@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import randomizeTeam from "@/app/utils/randomTeam"
   
 export async function GET() {
-    const randomTeam = randomizeTeam(80, 90)
+    const randomTeam = randomizeTeam(60, 90)
 
     const response = await fetch(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${randomTeam}&APIkey=${process.env.API_KEY}`,
         { cache: "no-store" } 
